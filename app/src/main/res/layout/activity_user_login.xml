@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="e.rezeda.chat.UserLoginViewModel" />
+    </data>
+
+
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="52dp"
+        android:text="@{String.valueOf(viewModel.integ)}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:onClick="@{(v) -> viewModel.onButtonClick(v)}"
+        />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="161dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="@={viewModel.user.password}"
+        app:layout_constraintBottom_toBottomOf="@+id/textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editUsername"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editUsername" />
+
+    <EditText
+        android:id="@+id/editUsername"
+        android:layout_width="160dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:ems="10"
+        android:inputType="text|textEmailAddress"
+        android:text="@={viewModel.user.username}"
+        app:layout_constraintBottom_toBottomOf="@+id/textUsername"
+        app:layout_constraintStart_toEndOf="@+id/textUsername"
+        app:layout_constraintTop_toTopOf="@+id/textUsername" />
+
+    <TextView
+        android:id="@+id/textUsername"
+        android:layout_width="85dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="120dp"
+        android:text="Логин"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textPassword"
+        android:layout_width="84dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="56dp"
+        android:text="Пароль"
+        app:layout_constraintEnd_toEndOf="@+id/textUsername"
+        app:layout_constraintStart_toStartOf="@+id/textUsername"
+        app:layout_constraintTop_toBottomOf="@+id/textUsername" />
+
+</android.support.constraint.ConstraintLayout>
+</layout>
