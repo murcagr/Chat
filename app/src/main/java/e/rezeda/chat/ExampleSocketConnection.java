@@ -30,7 +30,7 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
             if(!messages.isEmpty()){
                 sendText(messages.poll());
             }
-        }ss
+        }
         startCheckConnection();
     };
 
