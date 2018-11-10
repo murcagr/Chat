@@ -27,8 +27,8 @@ public class ChatRoomsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_rooms);
         setBinding(savedInstanceState);
+
         //EventBus.getDefault().post(gson.fromJson(message, e.rezeda.chat.RealTimeEvent.class));
-        SocketConnection
     }
 
 
@@ -84,6 +84,7 @@ public class ChatRoomsActivity extends AppCompatActivity {
             @Override
             public void onChanged(ChatRoom dogBreed) {
                 if (dogBreed != null) {
+                    //SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChatList\", \"username\": \"admin\"}");
                     Toast.makeText(ChatRoomsActivity.this, "You selected a ", Toast.LENGTH_SHORT).show();
                 }
             }

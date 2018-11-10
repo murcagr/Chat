@@ -64,6 +64,7 @@ public class ClientWebSocket {
     }
 
     public void send(String message){
+        Log.i(TAG, "Massage sended");
         if (ws != null) {
             ws.sendText(message);
         }
@@ -85,7 +86,7 @@ public class ClientWebSocket {
         public void onConnected(WebSocket websocket, Map<String, List<String>> headers) throws Exception {
             super.onConnected(websocket, headers);
             Log.i(TAG, "onConnected");
-            ws.sendText("{\"type\": \"send\", \"from_who\": \"vanya\", \"to_who\": \"dima\", \"message\": \"Hello\"}");
+            //ws.sendText("{\"type\": \"send\", \"from_who\": \"vanya\", \"to_who\": \"dima\", \"message\": \"Hello\"}");
         }
 
         @Override

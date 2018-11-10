@@ -9,12 +9,23 @@ import e.rezeda.chat.ChatRooms;
 public class ChatRoom {
 
     private String name;
-    private String message;
+    private String text;
     private Image image;
 
     public ChatRoom(){
         this.name = "lalhdalal";
-        this.message = "asdasd";
+        this.text = "asdasd";
+        this.image = null;
+    }
+
+    public ChatRoom(String name, String text, Image image){
+        this.name = "lalhdalal";
+        this.text = "asdasd";
+        this.image = null;
+    }
+    public ChatRoom(String name, String text){
+        this.name = "lalhdalal";
+        this.text = "asdasd";
         this.image = null;
     }
 
@@ -36,12 +47,12 @@ public class ChatRoom {
         return name;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessage(String text) {
+        this.text = text;
     }
 
     public String getMessage() {
-        return message;
+        return text;
     }
 
 

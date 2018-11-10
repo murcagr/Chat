@@ -5,16 +5,16 @@ import android.util.Log;
 
 
 public class SocketConnection extends Application {
-
-    private static ExampleSocketConnection exampleSocketConnection;
+    private static SocketConnection instance;
+    private ExampleSocketConnection exampleSocketConnection;
+    public static int glob = 5;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        instance = this;
         exampleSocketConnection = new ExampleSocketConnection(this);
         BackgroundManager.get(this).registerListener(appActivityListener);
-        //exampleSocketConnection.addMessageToQueue("{\"type\": \"getMessagesForChatList\", \"username\" : \"admin\"}");
     }
 
 
@@ -34,6 +34,9 @@ public class SocketConnection extends Application {
         return exampleSocketConnection.isConnected();
     }
 
+    public static SocketConnection getInstance() {
+        return instance;
+    }
 
     public void sendMessage(String message){
         exampleSocketConnection.addMessageToQueue(message);

@@ -28,12 +28,12 @@
             android:layout_height="80dp">
 
             <TextView
-                android:id="@+id/txtName2"
+                android:id="@+id/txtName"
 
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="84dp"
+                android:layout_marginLeft="84dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@{ChatRoomsViewModel.getChatRoomAt(position).name}"
@@ -41,18 +41,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="Test" />
 
             <TextView
-                android:id="@+id/txtName"
+                android:id="@+id/txtMessage"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
-                android:layout_marginLeft="52dp"
-                android:text="@{ChatRoomsViewModel.getChatRoomAt(position).name}"
+                android:text="@{ChatRoomsViewModel.getChatRoomAt(position).message}"
                 android:textSize="16dp"
-                app:layout_constraintStart_toEndOf="@+id/txtName2"
-                app:layout_constraintTop_toTopOf="@+id/txtName2"
+                tools:layout_editor_absoluteX="86dp"
+                tools:layout_editor_absoluteY="42dp"
                 tools:text="Test" />
         </android.support.constraint.ConstraintLayout>
 

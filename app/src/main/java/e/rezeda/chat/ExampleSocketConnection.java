@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -27,20 +28,25 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
     private Runnable checkConnectionRunnable = () -> {
         if (!clientWebSocket.getConnection().isOpen()) {
             openConnection();
-            if(!messages.isEmpty()){
-                sendText(messages.poll());
-            }
         }
+        Log.i("Websocket", "Socket connected la la");
         startCheckConnection();
     };
 
     private Runnable checkMessageQueueRunnable = () -> {
-        if (!clientWebSocket.getConnection().isOpen()) {
+        if (clientWebSocket.getConnection().isOpen()) {
             if(!messages.isEmpty()){
-                sendText(messages.poll());
+                Log.i("Websocket", "Message Sended");
+                while(!messages.isEmpty()) {
+                    sendText(messages.poll());
+                }
             }
+            else {
+                Log.i("Websocket", "Messages null");
+            }
+
         }
-        startCheckConnection();
+        startCheckMessageQueue();
     };
 
     public void addMessageToQueue(String message){
@@ -61,7 +67,7 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
 
     private void startCheckMessageQueue() {
 
-        socketConnectionHandler.postDelayed(checkMessageQueueRunnable, 100);
+        socketConnectionHandler.postDelayed(checkMessageQueueRunnable, 4000);
     }
 
     private void stopCheckMessageQueue() {
@@ -70,7 +76,7 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
 
 
     public void sendText(String message) {
-        clientWebSocket.send("{\"type\": \"getMessagesForChatList\", \"username\" : \"admin\"}");
+        clientWebSocket.send(message);
     }
 
 
@@ -81,11 +87,6 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
         socketConnectionHandler = new Handler();
     }
 
-    public static void  init(Context context) {
-        messages = new LinkedList();
-        this.context = context;
-        socketConnectionHandler = new Handler();
-    }
     public void openConnection() {
 
         String SOCKET_URL = WsConfig.URL_WEBSOCKET;
@@ -118,7 +119,12 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
 
     @Override
     public void onSocketMessage(String message) {
-        EventBus.getDefault().post(new MessageEvent(message));
+        RealTimeEvent realTimeEvent = gson.fromJson(message, RealTimeEvent.class);
+
+        EventBus.getDefault().post(message);
+        int a =5;
+        int b = 4;
+        int c = 3 + 4;
     }
 
     /**
