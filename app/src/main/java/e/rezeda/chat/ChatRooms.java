@@ -1,7 +1,6 @@
 package e.rezeda.chat;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,10 +39,10 @@ public class ChatRooms {
     //TODO Make load from server
 
     @Subscribe
-    public void fetchList() {
-        //if (messageEvent.getType() == MessageEvent.EVENT_CHAT_LISTS) {
-//
-  //      }
+    public void fetchList(MessageEvent messageEvent) {
+        if (messageEvent.getType() == "type") {
+
+        }
         ChatRoom chatRoom1 = new ChatRoom();
         List<ChatRoom> kokoko = new ArrayList<>();
 
@@ -52,7 +51,6 @@ public class ChatRooms {
     }
 
     public void askForUpdateChatRooms(){
-        Log.i("ChatRooms", "askForUpdateChatRooms");
         SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChatList\", \"username\": \"admin\"}");
     }
 

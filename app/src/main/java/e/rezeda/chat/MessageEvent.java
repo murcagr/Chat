@@ -8,17 +8,17 @@ public class MessageEvent {
     public static int  EVENT_CHAT_LISTS = 1;
 
     @SerializedName("event")
-    private int event;
+    private String type;
 
-    public final String message;
+    public final String params;
 
-    public MessageEvent(String message) {
+    public MessageEvent(String params) {
 
-        this.message = message;
+        this.params = params;
     }
 
-    public int getType() {
-        return event;
+    public String getType() {
+        return type;
     }
 
     //public <T> T getParams(Class<T> type) {

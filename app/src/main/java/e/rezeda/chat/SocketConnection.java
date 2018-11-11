@@ -3,6 +3,12 @@ package e.rezeda.chat;
 import android.app.Application;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 
 public class SocketConnection extends Application {
     private static SocketConnection instance;
@@ -15,6 +21,7 @@ public class SocketConnection extends Application {
         instance = this;
         exampleSocketConnection = new ExampleSocketConnection(this);
         BackgroundManager.get(this).registerListener(appActivityListener);
+
     }
 
 

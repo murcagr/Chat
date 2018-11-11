@@ -62,7 +62,7 @@ public class ChatRoomsActivity extends AppCompatActivity {
 
     private void setupListUpdate() {
         viewModelChat.loading.set(View.VISIBLE);
-        viewModelChat.fetchList();
+        viewModelChat.askForUpdateChatRooms();
 
         viewModelChat.getChatRooms().observe(this, new Observer<List<ChatRoom>>() {
             @Override

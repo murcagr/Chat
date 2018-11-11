@@ -32,8 +32,8 @@ public class ChatRoomsViewModel extends ViewModel {
     }
 
 
-    public void fetchList() {
-        chatRooms.fetchList();
+    public void askForUpdateChatRooms() {
+        chatRooms.askForUpdateChatRooms();
     }
 
     public MutableLiveData<List<ChatRoom>> getChatRooms() {

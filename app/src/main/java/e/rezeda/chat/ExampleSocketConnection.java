@@ -8,9 +8,13 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -42,9 +46,8 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
                 }
             }
             else {
-                Log.i("Websocket", "Messages null");
+                Log.i("Websocket", "Message not sended");
             }
-
         }
         startCheckMessageQueue();
     };
@@ -119,12 +122,16 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
 
     @Override
     public void onSocketMessage(String message) {
-        RealTimeEvent realTimeEvent = gson.fromJson(message, RealTimeEvent.class);
-
-        EventBus.getDefault().post(message);
-        int a =5;
-        int b = 4;
-        int c = 3 + 4;
+        try{
+            JSONArray jsonObject = new JSONArray(message);
+            int k = 0;
+        }
+        catch (JSONException e) {
+            //TODO smthng
+            Log.i("JSON","Error");
+        }
+        //EventBus.getDefault().post(gson.fromJson(message,RealTimeEvent.class));
+        //EventBus.getDefault().post(new MessageEvent(message));
     }
 
     /**
