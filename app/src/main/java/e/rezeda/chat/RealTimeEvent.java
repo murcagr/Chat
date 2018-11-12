@@ -15,6 +15,9 @@ public class RealTimeEvent {
         return event;
     }
 
+    //public String getUserId() {
+        //return userId;
+    //}
 
     public <T> T getParams(Class<T> type) {
         return new Gson().fromJson(params.toString(), type);

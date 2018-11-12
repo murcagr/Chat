@@ -2,6 +2,8 @@ package e.rezeda.chat;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableArrayMap;
 import android.databinding.ObservableInt;
 import android.view.View;
@@ -54,9 +56,12 @@ public class ChatRoomsViewModel extends ViewModel {
     }
 
 
-    public void onItemClick(Integer index) {
+    public void onItemClick(Integer index, View view) {
         ChatRoom chatRoom = getChatRoomAt(index);
         selected.setValue(chatRoom);
+        Context context = view.getContext();
+        Intent intent = new Intent(context, ChatMessageActivity.class);
+        context.startActivity(intent);
     }
 
     public ChatRoom getChatRoomAt(Integer index) {

@@ -1,24 +1,25 @@
 package e.rezeda.chat;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.databinding.BaseObservable;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import e.rezeda.chat.SocketConnection;
-import e.rezeda.chat.Models.Message;
 
-public class ChatRooms {
+public class ChatMessages extends BaseObservable {
 
     String status;
-    List<ChatRoom> chatRoomList = new ArrayList<>();
-    MutableLiveData<List<ChatRoom>> chatRooms = new MutableLiveData<>();
+    String to_who;
+    List<ChatMessage> chatMessageList = new ArrayList<>();
+    MutableLiveData<List<ChatMessage>> chatMessages = new MutableLiveData<>();
 
-    ChatRooms(){
+
+
+    ChatMessages(){
         EventBus.getDefault().register(this);
     }
 
@@ -30,15 +31,16 @@ public class ChatRooms {
         this.status = status;
     }
 
-    public void addChatRoom(ChatRoom bd) {
-        chatRoomList.add(bd);
-    }
-
-    public MutableLiveData<List<ChatRoom>> getChatRooms() {
-        return chatRooms;
+    public void addChatMessage(ChatMessage bd) {
+        chatMessageList.add(bd);
+        chatMessages.setValue(chatMessageList);
     }
 
 
+
+    public MutableLiveData<List<ChatMessage>> getChatMessages() {
+        return chatMessages;
+    }
 
 
     //TODO Make load from server
@@ -46,21 +48,19 @@ public class ChatRooms {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void fetchList(com.example.MessageEvent messageEvent) {
 
-        List<ChatRoom> kokoko = new ArrayList<>();
-        if (messageEvent.getType().equals("getMessagesForChatListResult")) {
+        if (messageEvent.getType().equals("getMessagesForChatResult")) {
             List<ChatListMessages> data = messageEvent.getData();
             for(int i = 0; i < messageEvent.getData().size(); i++){
-                ChatRoom chatRoom1 = new ChatRoom(data.get(i).getFromWho(),data.get(i).getText());
-                kokoko.add(chatRoom1);
+                chatMessageList.add(new ChatMessage(data.get(i).getFromWho(),data.get(i).getText()));
             }
         }
 
         //SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChatList\", \"username\": \"admin\"}");
-        chatRooms.setValue(kokoko);
+        chatMessages.setValue(chatMessageList);
     }
 
-    public void askForUpdateChatRooms(){
-        SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChatList\", \"username\": \"admin\"}");
+    public void askForUpdateChatMessages(){
+        SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChat\", \"to_who\": \"admin\"}");
     }
 
 }

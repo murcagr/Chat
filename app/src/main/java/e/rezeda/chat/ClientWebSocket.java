@@ -72,7 +72,12 @@ public class ClientWebSocket {
 
 
     public WebSocket getConnection() {
-        return ws;
+        if (ws != null) {
+            return ws;
+        }
+        else{
+            return null;
+        }
     }
 
     public void close() {

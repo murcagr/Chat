@@ -1,29 +1,34 @@
-package e.rezeda.chat;
+package com.example;
 
-import com.google.gson.Gson;
+import java.util.List;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import e.rezeda.chat.ChatListMessages;
 
 public class MessageEvent {
 
-    public static int  EVENT_CHAT_LISTS = 1;
-
-    @SerializedName("event")
+    @SerializedName("type")
+    @Expose
     private String type;
-
-    public final String params;
-
-    public MessageEvent(String params) {
-
-        this.params = params;
-    }
+    @SerializedName("data")
+    @Expose
+    private List<ChatListMessages> data = null;
 
     public String getType() {
         return type;
     }
 
-    //public <T> T getParams(Class<T> type) {
-        //return new Gson().fromJson(params.toString(), type);
-    //}
+    public void setType(String type) {
+        this.type = type;
+    }
 
+    public  List<ChatListMessages> getData() {
+        return data;
+    }
+
+    public void setData( List<ChatListMessages> data) {
+        this.data = data;
+    }
 
 }

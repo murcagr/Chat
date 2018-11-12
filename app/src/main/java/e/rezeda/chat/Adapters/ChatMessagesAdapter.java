@@ -11,16 +11,16 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import e.rezeda.chat.BR;
-import e.rezeda.chat.ChatRoom;
-import e.rezeda.chat.ChatRoomsViewModel;
+import e.rezeda.chat.ChatMessage;
+import e.rezeda.chat.ChatMessageViewModel;
 
-public class ChatMessagesAdapter extends   RecyclerView.Adapter<ChatMessagesAdapter.GenericViewHolder>{
+public class ChatMessagesAdapter extends RecyclerView.Adapter<ChatMessagesAdapter.GenericViewHolder>{
     private int layoutId;
-    private List<ChatRoom> chatMessages;
-    private ChatRoomsViewModel viewModel;
+    private List<ChatMessage> chatMessages;
+    private ChatMessageViewModel viewModel;
 
 
-    public ChatMessagesAdapter(@LayoutRes int layoutId, ChatRoomsViewModel viewModel) {
+    public ChatMessagesAdapter(@LayoutRes int layoutId, ChatMessageViewModel viewModel) {
         this.layoutId = layoutId;
         this.viewModel = viewModel;
     }
@@ -52,7 +52,7 @@ public class ChatMessagesAdapter extends   RecyclerView.Adapter<ChatMessagesAdap
         return getLayoutIdForPosition(position);
     }
 
-    public void setChatRooms(List<ChatRoom> chatMessages) {
+    public void setChatMessages(List<ChatMessage> chatMessages) {
         this.chatMessages = chatMessages;
     }
 
@@ -64,9 +64,9 @@ public class ChatMessagesAdapter extends   RecyclerView.Adapter<ChatMessagesAdap
             this.binding = binding;
         }
         //TODO Change
-        void bind(ChatRoomsViewModel viewModel, Integer position) {
+        void bind(ChatMessageViewModel viewModel, Integer position) {
 
-            binding.setVariable(BR.ChatRoomsViewModel, viewModel);
+            binding.setVariable(BR.ChatMessageViewModel, viewModel);
             binding.setVariable(BR.position, position);
             binding.executePendingBindings();
         }

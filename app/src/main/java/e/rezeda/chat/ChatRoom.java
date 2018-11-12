@@ -24,8 +24,8 @@ public class ChatRoom {
         this.image = null;
     }
     public ChatRoom(String name, String text){
-        this.name = "lalhdalal";
-        this.text = "asdasd";
+        this.name = name;
+        this.text = text;
         this.image = null;
     }
 

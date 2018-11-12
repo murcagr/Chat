@@ -1,20 +1,30 @@
 package e.rezeda.chat.Models;
 
 import android.databinding.BaseObservable;
+import android.databinding.ObservableField;
 import android.media.Image;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import e.rezeda.chat.R;
+import e.rezeda.chat.SocketConnection;
 
 public class User extends BaseObservable {
 
-    String username;
-    Image avatarImg;
-    String ip;
-    String password;
+    private String username;
+    private Image avatarImg;
+    private String ip;
+    private String password;
+    private Short isValidF = -1;
 
+    public ObservableField<Integer> emailError = new ObservableField<>();
+    public ObservableField<Integer> passwordError = new ObservableField<>();
 
-//    public User(String username, String ip){
-//        this.username = username;
-//        this.ip = ip;
-//    }
+    public User(){
+        EventBus.getDefault().register(this);
+    }
 
     public String getUsername() {
         return username;
@@ -51,5 +61,46 @@ public class User extends BaseObservable {
     }
 
 
+
+    public boolean isValid() {
+        boolean valid = isUsernameValid();
+        valid = isPasswordValid() && valid;
+        startCheckUser();
+
+        if(valid){
+            startCheckUser();
+        }
+        return false;
+    }
+
+    public void startCheckUser() {
+        String output = String.format("{\"type\": \"register\", \"username\" : \"%s\", \"passsword\" : \"%s\"}", username, password);
+        SocketConnection.getInstance().sendMessage(output);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void checkOnServer(com.example.MessageEvent messageEvent) {
+        if (messageEvent.getType().equals("RegisterSuccess")) {
+            isValidF = 1;
+        }
+        else {
+            isValidF = 0;
+        }
+    }
+
+    public boolean isUsernameValid() {
+        if (username != null && username.length() > 5) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPasswordValid() {
+        if (username != null && username.length() > 5) {
+            return true;
+        }
+        return false;
+
+    }
 
 }

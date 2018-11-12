@@ -3,6 +3,8 @@ package e.rezeda.chat;
 import android.app.Application;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,12 +17,15 @@ public class SocketConnection extends Application {
     private ExampleSocketConnection exampleSocketConnection;
     public static int glob = 5;
 
+    public Gson gson = new Gson();
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
         exampleSocketConnection = new ExampleSocketConnection(this);
         BackgroundManager.get(this).registerListener(appActivityListener);
+
 
     }
 

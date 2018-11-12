@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Chat</string>
+    <string name="error_format_invalid">Format Error</string>
+    <string name="error_too_short">Username too short</string>
 </resources>

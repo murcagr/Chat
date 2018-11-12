@@ -70,7 +70,7 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
 
     private void startCheckMessageQueue() {
 
-        socketConnectionHandler.postDelayed(checkMessageQueueRunnable, 4000);
+        socketConnectionHandler.postDelayed(checkMessageQueueRunnable, 30);
     }
 
     private void stopCheckMessageQueue() {
@@ -122,14 +122,15 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
 
     @Override
     public void onSocketMessage(String message) {
-        try{
-            JSONArray jsonObject = new JSONArray(message);
+            //JSONObject jsonObject = new JSONObject(message);
+            //JSONObject a = jsonObject.getJSONObject("type");
+        message = "{\"type\":\"getMessagesForChatListResult\",\"data\":[{\"id\": 21,\"text\":\"asdasd\",\"is_read\":0,\"from_who\":\"Robert Plant\"},{\"id\":43,\"text\":\"Hello\",\"is_read\":0,\"from_who\":\"Jimmy Page\"}]}";
+
+        com.example.MessageEvent json = gson.fromJson(message, com.example.MessageEvent.class);
+
+        EventBus.getDefault().post(json);
             int k = 0;
-        }
-        catch (JSONException e) {
-            //TODO smthng
-            Log.i("JSON","Error");
-        }
+
         //EventBus.getDefault().post(gson.fromJson(message,RealTimeEvent.class));
         //EventBus.getDefault().post(new MessageEvent(message));
     }
