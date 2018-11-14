@@ -13,12 +13,14 @@ import java.util.List;
 import e.rezeda.chat.Adapters.ChatMessagesAdapter;
 import e.rezeda.chat.Adapters.ChatRoomsAdapter;
 import e.rezeda.chat.Models.Message;
+import e.rezeda.chat.Models.User;
 
 public class ChatMessageViewModel extends ViewModel {
     private ChatMessages chatMessages;
     public ChatMessage message;
     private ChatMessagesAdapter adapter;
     public MutableLiveData<ChatMessage> selected;
+    private MutableLiveData<String> buttonClick = new MutableLiveData<>();
     public ObservableArrayMap<String, String> images;
     public ObservableInt loading;
     public ObservableInt showEmpty;
@@ -40,6 +42,11 @@ public class ChatMessageViewModel extends ViewModel {
 
     public void setMessage(ChatMessage message) {
         this.message = message;
+    }
+
+
+    public MutableLiveData<String> getButtonClick() {
+        return buttonClick;
     }
 
     public void askForUpdateChatMessages() {

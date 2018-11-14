@@ -124,7 +124,7 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
     public void onSocketMessage(String message) {
             //JSONObject jsonObject = new JSONObject(message);
             //JSONObject a = jsonObject.getJSONObject("type");
-        message = "{\"type\":\"getMessagesForChatListResult\",\"data\":[{\"id\": 21,\"text\":\"asdasd\",\"is_read\":0,\"from_who\":\"Robert Plant\"},{\"id\":43,\"text\":\"Hello\",\"is_read\":0,\"from_who\":\"Jimmy Page\"}]}";
+        //message = "{\"type\":\"getMessagesForChatListResult\",\"data\":[{\"id\": 21,\"text\":\"asdasd\",\"is_read\":0,\"from_who\":\"Robert Plant\"},{\"id\":43,\"text\":\"Hello\",\"is_read\":0,\"from_who\":\"Jimmy Page\"}]}";
 
         com.example.MessageEvent json = gson.fromJson(message, com.example.MessageEvent.class);
 

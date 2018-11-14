@@ -23,7 +23,6 @@ public class User extends BaseObservable {
     public ObservableField<Integer> passwordError = new ObservableField<>();
 
     public User(){
-        EventBus.getDefault().register(this);
     }
 
     public String getUsername() {
@@ -68,9 +67,9 @@ public class User extends BaseObservable {
         startCheckUser();
 
         if(valid){
-            startCheckUser();
+            //startCheckUser();
         }
-        return false;
+        return valid;
     }
 
     public void startCheckUser() {
@@ -78,15 +77,6 @@ public class User extends BaseObservable {
         SocketConnection.getInstance().sendMessage(output);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void checkOnServer(com.example.MessageEvent messageEvent) {
-        if (messageEvent.getType().equals("RegisterSuccess")) {
-            isValidF = 1;
-        }
-        else {
-            isValidF = 0;
-        }
-    }
 
     public boolean isUsernameValid() {
         if (username != null && username.length() > 5) {

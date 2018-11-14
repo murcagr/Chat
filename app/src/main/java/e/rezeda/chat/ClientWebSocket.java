@@ -91,7 +91,7 @@ public class ClientWebSocket {
         public void onConnected(WebSocket websocket, Map<String, List<String>> headers) throws Exception {
             super.onConnected(websocket, headers);
             Log.i(TAG, "onConnected");
-            //ws.sendText("{\"type\": \"send\", \"from_who\": \"vanya\", \"to_who\": \"dima\", \"message\": \"Hello\"}");
+            ws.sendText("{\"type\": \"userData\", \"name\": \"admin\"}");
         }
 
         @Override
@@ -136,7 +136,6 @@ public class ClientWebSocket {
             websocket.sendPing("Are you there?");
         }
     }
-
 
     public interface MessageListener {
         void onSocketMessage(String message);
