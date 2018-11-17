@@ -4,7 +4,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import e.rezeda.chat.ChatListMessages;
+import e.rezeda.chat.JSONChatListMessages;
 
 public class MessageEvent {
 
@@ -13,7 +13,7 @@ public class MessageEvent {
     private String type;
     @SerializedName("data")
     @Expose
-    private List<ChatListMessages> data = null;
+    private List<JSONChatListMessages> data = null;
 
     public String getType() {
         return type;
@@ -23,11 +23,11 @@ public class MessageEvent {
         this.type = type;
     }
 
-    public  List<ChatListMessages> getData() {
+    public  List<JSONChatListMessages> getData() {
         return data;
     }
 
-    public void setData( List<ChatListMessages> data) {
+    public void setData( List<JSONChatListMessages> data) {
         this.data = data;
     }
 

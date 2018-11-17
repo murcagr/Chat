@@ -25,6 +25,16 @@ public class User extends BaseObservable {
     public User(){
     }
 
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username){
+        this.username = username;
+    }
+
+
     public String getUsername() {
         return username;
     }
@@ -62,15 +72,20 @@ public class User extends BaseObservable {
 
 
     public boolean isValid() {
-        boolean valid = isUsernameValid();
-        valid = isPasswordValid() && valid;
+        boolean valid = isUsernamePasswordValid();
         startCheckUser();
-
         if(valid){
             //startCheckUser();
         }
         return valid;
     }
+
+    public boolean isUsernamePasswordValid() {
+        boolean valid = isUsernameValid();
+        valid = isPasswordValid() && valid;
+        return valid;
+    }
+
 
     public void startCheckUser() {
         String output = String.format("{\"type\": \"register\", \"username\" : \"%s\", \"passsword\" : \"%s\"}", username, password);

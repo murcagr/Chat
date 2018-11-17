@@ -23,6 +23,15 @@ public class ChatMessages extends BaseObservable {
         EventBus.getDefault().register(this);
     }
 
+    ChatMessages(String to_who){
+        this.to_who = to_who;
+        //EventBus.getDefault().register(this);
+    }
+
+    public String getTo_who() {
+        return to_who;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -42,14 +51,16 @@ public class ChatMessages extends BaseObservable {
         return chatMessages;
     }
 
-
+    public List<ChatMessage> getChatMessageList() {
+        return chatMessageList;
+    }
     //TODO Make load from server
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void fetchList(com.example.MessageEvent messageEvent) {
 
         if (messageEvent.getType().equals("getMessagesForChatResult")) {
-            List<ChatListMessages> data = messageEvent.getData();
+            List<JSONChatListMessages> data = messageEvent.getData();
             for(int i = 0; i < messageEvent.getData().size(); i++){
                 chatMessageList.add(new ChatMessage(data.get(i).getFromWho(),data.get(i).getText()));
             }

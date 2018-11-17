@@ -30,7 +30,7 @@ public class ChatRoomsActivity extends AppCompatActivity {
     }
 
 
-    private void setBinding(Bundle savedInstanceState){
+    public void setBinding(Bundle savedInstanceState){
 
         ActivityChatRoomsBinding bindingChat = DataBindingUtil.setContentView(this, R.layout.activity_chat_rooms);
         viewModelChat = ViewModelProviders.of(this).get(ChatRoomsViewModel.class);

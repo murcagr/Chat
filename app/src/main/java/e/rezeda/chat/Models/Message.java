@@ -12,8 +12,7 @@ public class Message {
 
     }
 
-    public Message(Integer id, String from, String to, String message, boolean isSelf){
-        this.id = id;
+    public Message(String from, String to, String message){
         this.from = from;
         this.to = to;
         this.message = message;

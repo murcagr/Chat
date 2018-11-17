@@ -31,9 +31,10 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
 
     private Runnable checkConnectionRunnable = () -> {
         if (!clientWebSocket.getConnection().isOpen()) {
+            Log.i("Websocket", "Trying to open connection");
             openConnection();
         }
-        Log.i("Websocket", "Socket connected la la");
+        Log.i("Websocket", "CheckConnectionRunnable");
         startCheckConnection();
     };
 
@@ -74,7 +75,7 @@ public class ExampleSocketConnection implements ClientWebSocket.MessageListener 
     }
 
     private void stopCheckMessageQueue() {
-        socketConnectionHandler.removeCallbacks(checkConnectionRunnable);
+        socketConnectionHandler.removeCallbacks(checkMessageQueueRunnable);
     }
 
 

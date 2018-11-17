@@ -21,6 +21,7 @@ public class ClientWebSocket {
     private static final String TAG = "Websocket";
     private MessageListener listener;
     private String host;
+    // В оригинале тут стасика нет
     private WebSocket ws;
 
 
@@ -72,12 +73,8 @@ public class ClientWebSocket {
 
 
     public WebSocket getConnection() {
-        if (ws != null) {
-            return ws;
-        }
-        else{
-            return null;
-        }
+        return ws;
+
     }
 
     public void close() {

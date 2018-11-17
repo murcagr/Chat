@@ -6,11 +6,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import e.rezeda.chat.SocketConnection;
-import e.rezeda.chat.Models.Message;
 
 public class ChatRooms {
 
@@ -34,12 +31,20 @@ public class ChatRooms {
         chatRoomList.add(bd);
     }
 
+    public void delChatRoom(Integer index) {
+        chatRoomList.remove((int) index);
+    }
+    public void delAllChatRooms(){
+        chatRoomList.clear();
+    }
+
     public MutableLiveData<List<ChatRoom>> getChatRooms() {
         return chatRooms;
     }
 
-
-
+    public List<ChatRoom> getChatRoomList() {
+        return chatRoomList;
+    }
 
     //TODO Make load from server
 
@@ -48,7 +53,7 @@ public class ChatRooms {
 
         List<ChatRoom> kokoko = new ArrayList<>();
         if (messageEvent.getType().equals("getMessagesForChatListResult")) {
-            List<ChatListMessages> data = messageEvent.getData();
+            List<JSONChatListMessages> data = messageEvent.getData();
             for(int i = 0; i < messageEvent.getData().size(); i++){
                 ChatRoom chatRoom1 = new ChatRoom(data.get(i).getFromWho(),data.get(i).getText());
                 kokoko.add(chatRoom1);

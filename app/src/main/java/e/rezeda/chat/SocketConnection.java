@@ -13,11 +13,9 @@ import java.util.ArrayList;
 
 
 public class SocketConnection extends Application {
+
     private static SocketConnection instance;
     private ExampleSocketConnection exampleSocketConnection;
-    public static int glob = 5;
-
-    public Gson gson = new Gson();
 
     @Override
     public void onCreate() {
@@ -47,6 +45,15 @@ public class SocketConnection extends Application {
     }
 
     public static SocketConnection getInstance() {
+        SocketConnection localInsance = instance;
+        if (localInsance == null) {
+            synchronized (SocketConnection.class) {
+                localInsance = instance;
+                if (localInsance == null) {
+                    instance = localInsance = new SocketConnection();
+                }
+            }
+        }
         return instance;
     }
 

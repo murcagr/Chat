@@ -3,7 +3,7 @@ package e.rezeda.chat;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChatListMessages {
+public class JSONChatListMessages {
 
     @SerializedName("id")
     @Expose
@@ -17,6 +17,16 @@ public class ChatListMessages {
     @SerializedName("from_who")
     @Expose
     private String fromWho;
+
+    public JSONChatListMessages() {
+    }
+
+    public JSONChatListMessages(Integer id, String text, Integer isRead, String fromWho) {
+        this.id = id;
+        this.text = text;
+        this.isRead = isRead;
+        this.fromWho = fromWho;
+    }
 
     public Integer getId() {
         return id;
