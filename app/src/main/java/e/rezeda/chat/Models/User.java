@@ -4,11 +4,6 @@ import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
 import android.media.Image;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import e.rezeda.chat.R;
 import e.rezeda.chat.SocketConnection;
 
 public class User extends BaseObservable {
@@ -73,9 +68,17 @@ public class User extends BaseObservable {
 
     public boolean isValid() {
         boolean valid = isUsernamePasswordValid();
-        startCheckUser();
+       if(valid){
+            startRegisterUser();
+        }
+        return valid;
+    }
+
+
+    public boolean isValidA() {
+        boolean valid = isUsernamePasswordValid();
         if(valid){
-            //startCheckUser();
+            startAuthUser();
         }
         return valid;
     }
@@ -87,21 +90,27 @@ public class User extends BaseObservable {
     }
 
 
-    public void startCheckUser() {
+    public void startRegisterUser() {
         String output = String.format("{\"type\": \"register\", \"username\" : \"%s\", \"passsword\" : \"%s\"}", username, password);
         SocketConnection.getInstance().sendMessage(output);
     }
 
+    public void startAuthUser() {
+        String output = String.format("{\"type\": \"auth\", \"username\" : \"%s\", \"passsword\" : \"%s\"}", username, password);
+        SocketConnection.getInstance().sendMessage(output);
+    }
+
+
 
     public boolean isUsernameValid() {
-        if (username != null && username.length() > 5) {
+        if (username != null && username.length() >= 5) {
             return true;
         }
         return false;
     }
 
     public boolean isPasswordValid() {
-        if (username != null && username.length() > 5) {
+        if (username != null && username.length() >= 5) {
             return true;
         }
         return false;

@@ -42,6 +42,7 @@ public class ChatRoomsViewModel extends ViewModel {
         return chatRooms.getChatRooms();
     }
 
+
     public ChatRoomsAdapter getAdapter() {
         return adapter;
     }
@@ -61,6 +62,7 @@ public class ChatRoomsViewModel extends ViewModel {
         selected.setValue(chatRoom);
         Context context = view.getContext();
         Intent intent = new Intent(context, ChatMessageActivity.class);
+        intent.putExtra("USERNAME", selected.getValue().getName());
         context.startActivity(intent);
     }
 

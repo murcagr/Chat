@@ -1,6 +1,8 @@
 package e.rezeda.chat.Models;
 
-public class Message {
+import android.databinding.BaseObservable;
+
+public class Message extends BaseObservable {
     private Integer id;
     private String from;
     private String to;

@@ -88,7 +88,6 @@ public class ClientWebSocket {
         public void onConnected(WebSocket websocket, Map<String, List<String>> headers) throws Exception {
             super.onConnected(websocket, headers);
             Log.i(TAG, "onConnected");
-            ws.sendText("{\"type\": \"userData\", \"name\": \"admin\"}");
         }
 
         @Override

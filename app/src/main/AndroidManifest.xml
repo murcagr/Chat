@@ -19,12 +19,17 @@
         </activity>
 
         <activity android:name=".UserLoginActivity">
+        </activity>
+
+        <activity android:name=".UserAuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".ChatRoomsActivity">
         </activity>
         <activity android:name=".ChatMessageActivity">

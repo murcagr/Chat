@@ -16,6 +16,8 @@ public class ChatMessage extends BaseObservable {
         this.text = text;
     }
 
+    ChatMessage(){
+    }
 
 
     public String getText() {

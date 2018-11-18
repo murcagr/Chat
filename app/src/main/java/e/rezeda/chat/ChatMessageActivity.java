@@ -27,10 +27,11 @@ public class ChatMessageActivity extends AppCompatActivity {
 
     private void setBinding(Bundle savedInstanceState){
 
+        String chatName = getIntent().getStringExtra("USERNAME");
         ActivityChatMessagesBinding bindingChat = DataBindingUtil.setContentView(this, R.layout.activity_chat_messages);
         viewModelChat = ViewModelProviders.of(this).get(ChatMessageViewModel.class);
         if (savedInstanceState == null) {
-            viewModelChat.init();
+            viewModelChat.init(chatName);
         }
         bindingChat.setChatMessageViewModel(viewModelChat);
         bindingChat.setLifecycleOwner(this);

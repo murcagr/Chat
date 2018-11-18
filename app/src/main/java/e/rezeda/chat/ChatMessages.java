@@ -10,6 +10,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import e.rezeda.chat.Models.CurrentUser;
+
 public class ChatMessages extends BaseObservable {
 
     String status;
@@ -25,7 +27,7 @@ public class ChatMessages extends BaseObservable {
 
     ChatMessages(String to_who){
         this.to_who = to_who;
-        //EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
     }
 
     public String getTo_who() {
@@ -54,7 +56,6 @@ public class ChatMessages extends BaseObservable {
     public List<ChatMessage> getChatMessageList() {
         return chatMessageList;
     }
-    //TODO Make load from server
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void fetchList(com.example.MessageEvent messageEvent) {
@@ -65,13 +66,13 @@ public class ChatMessages extends BaseObservable {
                 chatMessageList.add(new ChatMessage(data.get(i).getFromWho(),data.get(i).getText()));
             }
         }
-
-        //SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChatList\", \"username\": \"admin\"}");
         chatMessages.setValue(chatMessageList);
     }
 
     public void askForUpdateChatMessages(){
-        SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChat\", \"to_who\": \"admin\"}");
+        String message = String.format("{\"type\": \"getMessagesForChat\", \"to_who\": \"%s\", \"from_who\": \"%s\"}",
+                CurrentUser.getInstance().getUser().getUsername(), this.to_who);
+        SocketConnection.getInstance().sendMessage(message);
     }
 
 }

@@ -9,6 +9,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import e.rezeda.chat.Models.CurrentUser;
+
 public class ChatRooms {
 
     String status;
@@ -60,12 +62,14 @@ public class ChatRooms {
             }
         }
 
-        //SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChatList\", \"username\": \"admin\"}");
         chatRooms.setValue(kokoko);
+
     }
 
     public void askForUpdateChatRooms(){
-        SocketConnection.getInstance().sendMessage("{\"type\": \"getMessagesForChatList\", \"username\": \"admin\"}");
+        String message = String.format("{\"type\": \"getMessagesForChatList\", \"username\": \"%s\"}",
+                CurrentUser.getInstance().getUser().getUsername());
+        SocketConnection.getInstance().sendMessage(message);
     }
 
 }

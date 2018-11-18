@@ -10,13 +10,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.List;
-
 import e.rezeda.chat.Models.CurrentUser;
 import e.rezeda.chat.Models.User;
 
 
-public class UserLoginViewModel extends ViewModel {
+public class UserAuthViewModel extends ViewModel {
 
     private User user;
 
@@ -34,32 +32,10 @@ public class UserLoginViewModel extends ViewModel {
 
 
     public void onButtonClick(View view) {
-            if(user.isValid()){
+            if(user.isValidA()){
                 buttonClick.setValue(user);
                 this.view = view;
             }
-    }
-
-    public void onButtonAuthClick(View view) {
-            this.view = view;
-            Context context = view.getContext();
-            Intent intent = new Intent(context, UserAuthActivity.class);
-            context.startActivity(intent);
-    }
-
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void checkOnServerReg(com.example.MessageEvent messageEvent) {
-        if (messageEvent.getType().equals("registerSuccess")) {
-            CurrentUser.getInstance().setUser(user);
-            Context context = view.getContext();
-            Intent intent = new Intent(context, ChatRoomsActivity.class);
-            context.startActivity(intent);
-            EventBus.getDefault().unregister(this);
-        }
-        else {
-
-        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
